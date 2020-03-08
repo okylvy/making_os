@@ -1,0 +1,15 @@
+     1                                  entry:
+     2 00000000 EB58                        jmp     ipl  ; jump to JPL
+     3                                     
+     4                                      ; BPB (BIOS Parameter Block)
+     5 00000002 90<rept>                    times   90 - ($ -$$) db 0x90
+     6                                  
+     7                                      ; IPL (Initial Program Loader)
+     8                                  ipl:
+     9                                  
+    10                                      ; End of the process.
+    11 0000005A EBFE                        jmp     $  ; while (1)
+    12                                  
+    13                                  ; Boot flag (End of head 512 byte)
+    14 0000005C 00<rept>                    times   510 - ($ - $$) db 0x00
+    15 000001FE 55AA                        db 0x55, 0xAA
